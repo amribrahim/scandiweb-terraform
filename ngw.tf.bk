@@ -1,0 +1,17 @@
+resource "aws_eip" "magento-nat1" {
+tags = {
+    Name = "magento-nat1"
+  }
+}
+
+
+
+
+resource "aws_nat_gateway" "magento-ngw1" {
+  allocation_id = "${aws_eip.magento-nat1.id}"
+  subnet_id     = "${aws_subnet.prod-pub-1.id}"
+
+  tags = {
+    Name = "magento-NAT1"
+  }
+}
